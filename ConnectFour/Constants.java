@@ -32,7 +32,7 @@ public class Constants
     
     // Strings
     public static final String DIVIDER_STRING = "|---|---|---|";
-    public static final String BOARD_STRING = "| %s | %s | %s |";
+    public static final String BOARD_STRING = "| %s | %s | %s | %s | %s | %s | %s |";
     public static final String GET_PLAYER_NAME = "Player %s: What is your name? -->";
     public static final String TITLE = "Thanks for playing Tic-Tac-Toe!";
     public static final String GET_ROW_MOVE = "Player %s (%s): Enter the row for your next move -->";
