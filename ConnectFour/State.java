@@ -13,34 +13,37 @@ public class State
 
     public boolean isWinner() {
         int total;
-        for (int row = 0; row < Constants.BOARD_SIZE_HEIGHT; row++) {
-            for (int col = 0; col < Constants.BOARD_SIZE_WIDTH - 2; col++) {
-                total = getBoardCell(row, col) + getBoardCell(row, col + 1) + getBoardCell(row, col + 2);
-                if (total == -3 || total == 3) {
+        //Horizontal
+          for (int row = 0; row < Constants.BOARD_SIZE_HEIGHT; row++) {
+            for (int col = 0; col < Constants.BOARD_SIZE_WIDTH - 3; col++) {
+                if (getBoardCell(row, col) != Constants.BLANK &&
+                        getBoardCell(row, col) == getBoardCell(row, col + 1) &&
+                        getBoardCell(row, col) == getBoardCell(row, col + 2) &&
+                        getBoardCell(row, col) == getBoardCell(row, col + 3)) {
                     return true;
                 }
             }
         }
+
+        // Vertical
         for (int col = 0; col < Constants.BOARD_SIZE_WIDTH; col++) {
-            for (int row = 0; row < Constants.BOARD_SIZE_HEIGHT - 2; row++) {
-                total = getBoardCell(row, col) + getBoardCell(row + 1, col) + getBoardCell(row + 2, col);
-                if (total == -3 || total == 3) {
+            for (int row = 0; row < Constants.BOARD_SIZE_HEIGHT - 3; row++) {
+                if (getBoardCell(row, col) != Constants.BLANK &&
+                        getBoardCell(row, col) == getBoardCell(row + 1, col) &&
+                        getBoardCell(row, col) == getBoardCell(row + 2, col) &&
+                        getBoardCell(row, col) == getBoardCell(row + 3, col)) {
                     return true;
                 }
             }
         }
-        for (int row = 0; row < Constants.BOARD_SIZE_HEIGHT - 2; row++) {
-            for (int col = 0; col < Constants.BOARD_SIZE_WIDTH - 2; col++) {
-                total = getBoardCell(row, col) + getBoardCell(row + 1, col + 1) + getBoardCell(row + 2, col + 2);
-                if (total == -3 || total == 3) {
-                    return true;
-                }
-            }
-        }
-        for (int row = 2; row < Constants.BOARD_SIZE_HEIGHT; row++) {
-            for (int col = 0; col < Constants.BOARD_SIZE_WIDTH - 2; col++) {
-                total = getBoardCell(row, col) + getBoardCell(row - 1, col + 1) + getBoardCell(row - 2, col + 2);
-                if (total == -3 || total == 3) {
+
+        // Diagonal (from top-left to bottom-right)
+        for (int row = 0; row < Constants.BOARD_SIZE_HEIGHT - 3; row++) {
+            for (int col = 0; col < Constants.BOARD_SIZE_WIDTH - 3; col++) {
+                if (getBoardCell(row, col) != Constants.BLANK &&
+                        getBoardCell(row, col) == getBoardCell(row + 1, col + 1) &&
+                        getBoardCell(row, col) == getBoardCell(row + 2, col + 2) &&
+                        getBoardCell(row, col) == getBoardCell(row + 3, col + 3)) {
                     return true;
                 }
             }
@@ -48,9 +51,8 @@ public class State
         return false;
     }
 
-    // Adjusted method for isTie to match a 6x7 board
     public boolean isTie() {
-        for (int row = 0; row < Constants.BOARD_SIZE_HEIGHT; row++) {
+         for (int row = 0; row < Constants.BOARD_SIZE_HEIGHT; row++) {
             for (int col = 0; col < Constants.BOARD_SIZE_WIDTH; col++) {
                 if (getBoardCell(row, col) == Constants.BLANK) {
                     return false;

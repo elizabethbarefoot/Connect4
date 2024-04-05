@@ -72,7 +72,7 @@ public class UI
     public int getMoveCol(int whoseMove, String xName, String oName) {
         int col = 0;
         boolean isLegalMove = false;
-        while (isLegalMove != true) {
+        while (!isLegalMove) {
             try {
                 System.out.printf(Constants.GET_COL_MOVE, getXOrO(whoseMove), getPlayerName(whoseMove, xName, oName));
                 col = scanner.nextInt();
@@ -82,11 +82,11 @@ public class UI
                 scanner.next();
             }
         }
-        while (col <= 0 || col >= 8) {
+        while (col <= 0 || col > Constants.BOARD_SIZE_WIDTH) {
             try {
                 System.out.printf(Constants.GET_COL_MOVE, getXOrO(whoseMove), getPlayerName(whoseMove, xName, oName));
                 col = scanner.nextInt();
-                if (col <= 0 || col >= 8){
+                if (col <= 0 || col > Constants.BOARD_SIZE_WIDTH){
                     System.out.println(Constants.INVALID_ROW_OR_COLUMN);
                     scanner.next();
                 }
@@ -113,9 +113,9 @@ public class UI
         System.out.println(Constants.DIVIDER_STRING);
         for (int row = 0; row < Constants.BOARD_SIZE_HEIGHT; row++) {
             for (int col = 0; col < Constants.BOARD_SIZE_WIDTH; col++) {
-                System.out.printf(Constants.BOARD_STRING, getXOrO(state.getBoardCell(row, col)));
+                System.out.print("| " + getXOrO(state.getBoardCell(row, col)) + " ");
             }
-            System.out.println();
+            System.out.println("|");
             System.out.println(Constants.DIVIDER_STRING);
         }
     }
