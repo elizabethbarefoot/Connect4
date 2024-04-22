@@ -10,16 +10,28 @@ public class State
     private String xName = "";
     private String oName = "";
     private int[][] board = new int[Constants.BOARD_SIZE_HEIGHT][Constants.BOARD_SIZE_WIDTH];
+    private int lastMoveRow;
+    private int lastMoveCol;
+
+    // Initialize the game board with default values
+    public State() {
+        // Initialize the game board with blank cells
+        for (int row = 0; row < Constants.BOARD_SIZE_HEIGHT; row++) {
+            for (int col = 0; col < Constants.BOARD_SIZE_WIDTH; col++) {
+                board[row][col] = Constants.BLANK;
+            }
+        }
+    }
 
     public boolean isWinner() {
         int total;
         //Horizontal
-          for (int row = 0; row < Constants.BOARD_SIZE_HEIGHT; row++) {
+        for (int row = 0; row < Constants.BOARD_SIZE_HEIGHT; row++) {
             for (int col = 0; col < Constants.BOARD_SIZE_WIDTH - 3; col++) {
                 if (getBoardCell(row, col) != Constants.BLANK &&
-                        getBoardCell(row, col) == getBoardCell(row, col + 1) &&
-                        getBoardCell(row, col) == getBoardCell(row, col + 2) &&
-                        getBoardCell(row, col) == getBoardCell(row, col + 3)) {
+                getBoardCell(row, col) == getBoardCell(row, col + 1) &&
+                getBoardCell(row, col) == getBoardCell(row, col + 2) &&
+                getBoardCell(row, col) == getBoardCell(row, col + 3)) {
                     return true;
                 }
             }
@@ -29,9 +41,9 @@ public class State
         for (int col = 0; col < Constants.BOARD_SIZE_WIDTH; col++) {
             for (int row = 0; row < Constants.BOARD_SIZE_HEIGHT - 3; row++) {
                 if (getBoardCell(row, col) != Constants.BLANK &&
-                        getBoardCell(row, col) == getBoardCell(row + 1, col) &&
-                        getBoardCell(row, col) == getBoardCell(row + 2, col) &&
-                        getBoardCell(row, col) == getBoardCell(row + 3, col)) {
+                getBoardCell(row, col) == getBoardCell(row + 1, col) &&
+                getBoardCell(row, col) == getBoardCell(row + 2, col) &&
+                getBoardCell(row, col) == getBoardCell(row + 3, col)) {
                     return true;
                 }
             }
@@ -41,9 +53,9 @@ public class State
         for (int row = 0; row < Constants.BOARD_SIZE_HEIGHT - 3; row++) {
             for (int col = 0; col < Constants.BOARD_SIZE_WIDTH - 3; col++) {
                 if (getBoardCell(row, col) != Constants.BLANK &&
-                        getBoardCell(row, col) == getBoardCell(row + 1, col + 1) &&
-                        getBoardCell(row, col) == getBoardCell(row + 2, col + 2) &&
-                        getBoardCell(row, col) == getBoardCell(row + 3, col + 3)) {
+                getBoardCell(row, col) == getBoardCell(row + 1, col + 1) &&
+                getBoardCell(row, col) == getBoardCell(row + 2, col + 2) &&
+                getBoardCell(row, col) == getBoardCell(row + 3, col + 3)) {
                     return true;
                 }
             }
@@ -52,7 +64,7 @@ public class State
     }
 
     public boolean isTie() {
-         for (int row = 0; row < Constants.BOARD_SIZE_HEIGHT; row++) {
+        for (int row = 0; row < Constants.BOARD_SIZE_HEIGHT; row++) {
             for (int col = 0; col < Constants.BOARD_SIZE_WIDTH; col++) {
                 if (getBoardCell(row, col) == Constants.BLANK) {
                     return false;
@@ -103,11 +115,30 @@ public class State
     }
 
     public void resetGameBoard() {
-        this.board = new int[Constants.BOARD_SIZE_WIDTH][Constants.BOARD_SIZE_HEIGHT];
+        this.board = new int[Constants.BOARD_SIZE_HEIGHT][Constants.BOARD_SIZE_WIDTH]; // Fix the size
         this.gameState = Constants.STANDBY;
         this.whoseMove = Constants.X;
         this.xName = "";
         this.oName = "";
     }
-}
 
+    public int getLastMoveRow() {
+        return lastMoveRow;
+    }
+
+    public void setLastMoveRow(int lastMoveRow) {
+        this.lastMoveRow = lastMoveRow;
+    }
+
+    public int getLastMoveCol() {
+        return lastMoveCol;
+    }
+
+    public void setLastMoveCol(int lastMoveCol) {
+        this.lastMoveCol = lastMoveCol;
+    }
+
+    public int[][] getBoard() {
+        return board;
+    }
+}

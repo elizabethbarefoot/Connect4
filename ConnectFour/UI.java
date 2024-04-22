@@ -1,4 +1,5 @@
 package ConnectFour;
+
 import java.util.Scanner;
 
 /**
@@ -40,63 +41,26 @@ public class UI
         return scanner.next();
     }
 
+    // Ensure getMoveRow method prompts within board size bounds
     public int getMoveRow(int whoseMove, String xName, String oName) {
         int row = 0;
         boolean isLegalMove = false;
-        while (isLegalMove != true) {
+        while (!isLegalMove) {
             try {
                 System.out.printf(Constants.GET_ROW_MOVE, getXOrO(whoseMove), getPlayerName(whoseMove, xName, oName));
                 row = scanner.nextInt();
-                isLegalMove = true;
-            } catch (Exception e) {
-                System.out.println(Constants.INVALID_ROW_OR_COLUMN);
-                scanner.next();
-            }
-        }
-        while (row <= 0 || row >= 7) {
-            try {
-                System.out.printf(Constants.GET_ROW_MOVE, getXOrO(whoseMove), getPlayerName(whoseMove, xName, oName));
-                row = scanner.nextInt();
-                if (row <= 0 || row >= 7){
-                    System.out.println(Constants.INVALID_ROW_OR_COLUMN);
-                    scanner.next();
+                isLegalMove = 1 <= row && row <= Constants.BOARD_SIZE_HEIGHT;
+                if (!isLegalMove) {
+                    System.out.println(Constants.INVALID_ROW);
                 }
             } catch (Exception e) {
-                System.out.println(Constants.INVALID_ROW_OR_COLUMN);
+                System.out.println(Constants.INVALID_ROW);
                 scanner.next();
             }
         }
         return row;
     }
 
-    public int getMoveCol(int whoseMove, String xName, String oName) {
-        int col = 0;
-        boolean isLegalMove = false;
-        while (!isLegalMove) {
-            try {
-                System.out.printf(Constants.GET_COL_MOVE, getXOrO(whoseMove), getPlayerName(whoseMove, xName, oName));
-                col = scanner.nextInt();
-                isLegalMove = true;
-            } catch (Exception e) {
-                System.out.println(Constants.INVALID_ROW_OR_COLUMN);
-                scanner.next();
-            }
-        }
-        while (col <= 0 || col > Constants.BOARD_SIZE_WIDTH) {
-            try {
-                System.out.printf(Constants.GET_COL_MOVE, getXOrO(whoseMove), getPlayerName(whoseMove, xName, oName));
-                col = scanner.nextInt();
-                if (col <= 0 || col > Constants.BOARD_SIZE_WIDTH){
-                    System.out.println(Constants.INVALID_ROW_OR_COLUMN);
-                    scanner.next();
-                }
-            } catch (Exception e) {
-                System.out.println(Constants.INVALID_ROW_OR_COLUMN);
-                scanner.next();
-            }
-        }
-        return col;
-    }
 
     public boolean startNewGame() {
         System.out.println(Constants.START_NEW_GAME);
@@ -119,9 +83,8 @@ public class UI
             System.out.println(Constants.DIVIDER_STRING);
         }
     }
-
     public void printInvalidRowOrColumn(int rowOrCol) {
-        System.out.printf(Constants.INVALID_ROW_OR_COLUMN);
+        System.out.printf(Constants.INVALID_ROW);
     }
 
     public void printInvalidMove(int row, int col) {
@@ -152,4 +115,3 @@ public class UI
         System.out.println(Constants.TIE_GAME);
     }
 }
-

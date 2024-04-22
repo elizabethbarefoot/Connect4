@@ -4,4 +4,6 @@ comment1.params=args
 comment1.target=void\ main(java.lang.String[])
 comment2.params=
 comment2.target=void\ run()
-numComments=3
+comment3.params=state\ col
+comment3.target=int\ makeMove(State,\ int)
+numComments=4
