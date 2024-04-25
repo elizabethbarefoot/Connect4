@@ -32,35 +32,33 @@ public class UI
     public boolean isLegalMove(State state, int row, int col) {
         return 1 <= row && row <= Constants.BOARD_SIZE_HEIGHT &&
         1 <= col && col <= Constants.BOARD_SIZE_WIDTH &&
-        state.getBoardCell(row-1, col-1) == Constants.BLANK;
+        state.getBoardCell(row - 1, col - 1) == Constants.BLANK;
     }
 
-    // Prompt for input methods
     public String promptForName(String player) {
         System.out.printf(Constants.GET_PLAYER_NAME, player);
         return scanner.next();
     }
 
-    // Ensure getMoveRow method prompts within board size bounds
-    public int getMoveRow(int whoseMove, String xName, String oName) {
-        int row = 0;
-        boolean isLegalMove = false;
-        while (!isLegalMove) {
+    public int getMoveCol(int whoseMove, String xName, String oName) {
+        int col = 0;
+        while (true) {
             try {
-                System.out.printf(Constants.GET_ROW_MOVE, getXOrO(whoseMove), getPlayerName(whoseMove, xName, oName));
-                row = scanner.nextInt();
-                isLegalMove = 1 <= row && row <= Constants.BOARD_SIZE_HEIGHT;
-                if (!isLegalMove) {
-                    System.out.println(Constants.INVALID_ROW);
+                System.out.printf(Constants.GET_COL_MOVE, getXOrO(whoseMove), getPlayerName(whoseMove, xName, oName));
+                col = scanner.nextInt();
+                System.out.println("DEBUG: Column input received: " + col); // Debugging statement
+                if (1 > col || col > Constants.BOARD_SIZE_WIDTH) {
+                    System.out.println(Constants.INVALID_COL);
+                } else {
+                    break;
                 }
             } catch (Exception e) {
-                System.out.println(Constants.INVALID_ROW);
+                System.out.println(Constants.INVALID_COL);
                 scanner.next();
             }
         }
-        return row;
+        return col;
     }
-
 
     public boolean startNewGame() {
         System.out.println(Constants.START_NEW_GAME);
@@ -83,8 +81,9 @@ public class UI
             System.out.println(Constants.DIVIDER_STRING);
         }
     }
+
     public void printInvalidRowOrColumn(int rowOrCol) {
-        System.out.printf(Constants.INVALID_ROW);
+        System.out.printf(Constants.INVALID_COL);
     }
 
     public void printInvalidMove(int row, int col) {
@@ -96,7 +95,7 @@ public class UI
             Constants.PRINT_MOVE,
             getXOrO(state.getWhoseMove()), 
             getPlayerName(state.getWhoseMove(), state.getXName(), state.getOName()), 
-            row, 
+            row,
             col
         );
         System.out.println();

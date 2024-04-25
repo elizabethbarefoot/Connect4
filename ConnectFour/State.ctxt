@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=State
-comment0.text=\n\ Tic-Tac-Toe\ state\ variables.\n
+comment0.text=\n\ Connect4\ state\ variables.\n
 comment1.params=
 comment1.target=State()
 comment10.params=

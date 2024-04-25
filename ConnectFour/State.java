@@ -1,7 +1,7 @@
 package ConnectFour; 
 
 /**
- * Tic-Tac-Toe state variables.
+ * Connect4 state variables.
  */
 public class State
 {
@@ -141,4 +141,8 @@ public class State
     public int[][] getBoard() {
         return board;
     }
-}
+} 
+
+
+
+
